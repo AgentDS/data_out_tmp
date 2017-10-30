@@ -5,11 +5,11 @@ full_shape = [943 1682 31];
 base1_sparse = sptensor(u1_base_idx,u1_base_value,full_shape);
 base1_full = full(base1_sparse);
 opts.maxit = 2000; opts.tol = 1e-4;
-[A,C, Out] = ntd(base1_full,[20 20 20],opts);
-file = ['/root/tensorD_f/data_out_tmp/matlab_out/ntucker_ml_20.txt'];
+% [A,C, Out] = ntd(base1_full,[20 20 20],opts);
+% file = ['/root/tensorD_f/data_out_tmp/matlab_out/ntucker_ml_20.txt'];
 
-% [A,Out] = ncp(base1_full,20,opts);
-% file = ['/root/tensorD_f/data_out_tmp/matlab_out/ncp_ml_20.txt'];
+[A,Out] = ncp(base1_full,20,opts);
+file = ['/root/tensorD_f/data_out_tmp/matlab_out/ncp_ml_20.txt'];
 
 % [fullP,U,lambda,rmse_hist] = cp_als(base1_full,20);
 % file = ['/root/tensorD_f/data_out_tmp/matlab_out/cp_ml_20.txt'];
