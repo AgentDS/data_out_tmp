@@ -186,7 +186,7 @@ for k = 1:maxit
     fullA = full(ttensor(C, A));
     rmse = RMSE_ignore_zero(M, fullA);
     Out.hist_rmse(k) = rmse;
-    if k==1 || (mod(k,20)==0)
+    if k==1 || (mod(k,200)==0)
         fprintf('iter %d    rmse = %.9f\n', k, rmse);
     end
 end

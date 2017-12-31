@@ -8,19 +8,23 @@ opts.maxit = 2000; opts.tol = 1e-4;
 % [A,C, Out] = ntd(base1_full,[20 20 20],opts);
 % file = ['/root/tensorD_f/data_out_tmp/matlab_out/ntucker_ml_20.txt'];
 
-[A,Out] = ncp(base1_full,20,opts);
-file = ['/root/tensorD_f/data_out_tmp/matlab_out/ncp_ml_20.txt'];
+% [A,Out] = ncp(base1_full,20,opts);
+% file = ['/root/tensorD_f/data_out_tmp/matlab_out/ncp_ml_20.txt'];
 
 % [fullP,U,lambda,rmse_hist] = cp_als(base1_full,20);
 % file = ['/root/tensorD_f/data_out_tmp/matlab_out/cp_ml_20.txt'];
 
-fid = fopen(file,'w');
-% iter = length(rmse_hist);
-% for ii = 1:iter
-%     fprintf(fid,'%.6f\n',rmse_hist(ii));
-% end
+[A,C,rmse_hist] = tucker_als(base1_full,[20 20 20]);
+file = ['/root/tensorD_f/data_out_tmp/matlab_out/tucker_ml_20.txt'];
 
-iter = length(Out.hist_rmse);
+
+fid = fopen(file,'w');
+iter = length(rmse_hist);
 for ii = 1:iter
-    fprintf(fid,'%.6f\n',Out.hist_rmse(ii));
+    fprintf(fid,'%.6f\n',rmse_hist(ii));
 end
+
+% iter = length(Out.hist_rmse);
+% for ii = 1:iter
+%     fprintf(fid,'%.6f\n',Out.hist_rmse(ii));
+% end
