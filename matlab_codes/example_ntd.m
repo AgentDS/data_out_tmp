@@ -1,8 +1,8 @@
 % An example of nonnegative Tucker decomposition
 %% Generate synthetic 3-order tensor
-N1 = 160;
-N2 = 160;
-N3 = 160;
+N1 = 80;
+N2 = 80;
+N3 = 80;
 R = 20;
 
 Nway = [N1,N2,N3]; % dimension of tensor
@@ -20,7 +20,7 @@ Mtrue = full(ttensor(G,A)); N = ndims(Mtrue);
 N = tensor(max(0,0.04*rand(N1,N2,N3)));
 M = Mtrue + N;
 %% Solve problem
-opts.maxit = 6000; opts.tol = 1e-4;
+opts.maxit = 10000; opts.tol = 1e-4;
 t0 = tic;
 [A,C,Out] = ntd(M,[25,25,25],opts);
 time = toc(t0);
