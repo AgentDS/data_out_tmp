@@ -22,7 +22,7 @@ M = Mtrue + N;
 %% Solve problem
 opts.maxit = 10000; opts.tol = 1e-4;
 t0 = tic;
-[A,C,Out] = ntd(M,[25,25,25],opts);
+[A,C,Out] = ntd(M,[20,20,20],opts);
 time = toc(t0);
 
 % 
