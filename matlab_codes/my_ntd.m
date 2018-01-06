@@ -1,4 +1,4 @@
-function [A,C,Out] = my_ntd(M,coreNway,opts)
+function [A,C,Out] = my_ntd(M,coreNway,opts,info,init)
 % ntd: nonnegative Tucker decomposition by block-coordinate
 % update
 %  min 0.5*||M - C \times_1 A_1 ...\times_N A_N||_F^2  
@@ -39,25 +39,31 @@ if isfield(opts,'maxT')   maxT = opts.maxT;   else maxT = 1e3;   end
 N = ndims(M); % M is an N-way tensor
 Nway = M.size; % dimension of M
 
-% if isfield(opts,'A0')
-%     A0 = opts.A0;
-% else
-%     A0 = cell(1,N);
-%     for n = 1:N
-%         % randomly generate each factor matrix
-%         A0{n} = max(0,randn(Nway(n),coreNway(n)));
-%     end
-% end
+if strcmp(init,'rand')
+    A0 = cell(1,N);
+    for n = 1:N
+        % randomly generate each factor matrix
+        A0{n} = max(0,rand(Nway(n),coreNway(n)));
+    end
+elseif strcmp(init,'randn')
+    A0 = cell(1,N);
+    for n = 1:N
+        % randomly generate each factor matrix
+        A0{n} = max(0,randn(Nway(n),coreNway(n)));
+    end
+else
+    A0 = rand_list(Nway,coreNway(1));
+end
 %% random A0 fixed
-A0 = rand_list(Nway,coreNway(1));
+%A0 = rand_list(Nway,coreNway(1));
 % if isfield(opts,'C0')  
 %     C0 = opts.C0; 
 % else
 %     % randomly generate core tensor
-%     C0 = tensor(max(0,randn(coreNway)));
+     C0 = tensor(max(0,randn(coreNway)));
 % end
 %% random C0 fixed
-C0 = tensor(ones(coreNway(1),coreNway(2),coreNway(3))/10);
+%C0 = tensor(ones(coreNway(1),coreNway(2),coreNway(3))/10);
 Mnrm = norm(M); obj0 = 0.5*Mnrm^2;
 
 Asq = cell(1,N);
@@ -188,9 +194,10 @@ for k = 1:maxit
     fullA = full(ttensor(C, A));
     rmse = RMSE_ignore_zero(M, fullA);
     Out.hist_rmse(k) = rmse;
-    if k==1 || (mod(k,1)==0)
+    if k==1 || (mod(k,info)==0)
         fprintf('iter %d    rmse = %.9f\n', k, rmse);
     end
 end
+fprintf('iter %d    rmse = %.9f\n', k, rmse);
 fprintf('\n'); Out.iter = k;
 
