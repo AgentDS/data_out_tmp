@@ -1,7 +1,7 @@
 %% Generate synthetic 3-order tensor
-N1 = 80;
-N2 = 80;
-N3 = 80;
+N1 = 40;
+N2 = 40;
+N3 = 40;
 R = 20;
 
 Nway = [N1,N2,N3]; % dimension of tensor
@@ -19,7 +19,7 @@ Mtrue = full(ttensor(G,A));
 N = tensor(max(0,0.1*rand(N1,N2,N3)));
 M = Mtrue + N;
 %% Solve problem
-[A,C,rmse_hist] = tucker_als(Mtrue,[10,10,10]);
+[A,C,rmse_hist] = tucker_als(Mtrue,[25,25,25]);
 
 
 % figure;
