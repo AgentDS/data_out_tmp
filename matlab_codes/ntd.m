@@ -187,7 +187,8 @@ for k = 1:maxit
     rmse = RMSE_ignore_zero(M, fullA);
     Out.hist_rmse(k) = rmse;
     if k==1 || (mod(k,info)==0)
-        fprintf('iter %d    rmse = %.9f\n', k, rmse);
+        fprintf('iter %d    rmse = %.9f,  relerr = %.9f\n', k, rmse, relerr2);
+        
     end
 end
 fprintf('iter %d    rmse = %.9f\n', k, rmse);

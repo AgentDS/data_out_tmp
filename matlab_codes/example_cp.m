@@ -1,7 +1,7 @@
 %% Generate synthetic 4-order tensor
-N1 = 40; 
-N2 = 40; 
-N3 = 40;% tensor dimension
+N1 = 20; 
+N2 = 20; 
+N3 = 20;% tensor dimension
 R = 20; % tensor rank
 
 % randomly generate factor matrices
@@ -15,7 +15,7 @@ M = ktensor({A_org,B_org,C_org});
 Mtrue = full(ktensor(M));
 N = tensor(max(0,0.1*rand(N1,N2,N3)));
 M = Mtrue + N;
-[fullP,U,lambda,rmse_hist] = cp_als(M,40);
+[fullP,U,lambda,rmse_hist] = cp_als(M,20);
 
 
 % figure;
