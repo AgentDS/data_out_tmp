@@ -18,7 +18,7 @@ file = ['/root/tensorD_f/data_out_tmp/matlab_out/ncp_ml_20.txt'];
 % file = ['/root/tensorD_f/data_out_tmp/matlab_out/tucker_ml_20.txt'];
 
 
-% fid = fopen(file,'w');
+fid = fopen(file,'w');
 % iter = length(rmse_hist);
 % for ii = 1:iter
 %     fprintf(fid,'%.6f\n',rmse_hist(ii));
